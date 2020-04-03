@@ -63,7 +63,7 @@ public abstract class AbstractPiece implements Pieces {
 
 	@Override
 	public String toString() {
-		return "AbstractPiece [couleur=" + couleur + ", coord=" + coord + "]";
+		return this.getClass().getSimpleName() + " [couleur=" + couleur + ", coord=" + coord + "]";
 	}
 	
 	public static void main(String args[]) {

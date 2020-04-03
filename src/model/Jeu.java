@@ -8,27 +8,57 @@ public class Jeu {
 	
 	List<Pieces> Liste_pieces;
 	
+	private Pieces findPiece(int x, int y) {
+		Pieces cherchee = null;
+		for(Pieces Piece:this.Liste_pieces) {
+			if( Piece.getX() == x && Piece.getY() == y) {
+				cherchee = Piece;
+			}
+		}
+	return cherchee;	
+	}
+	
 	public Jeu(Couleur couleur) {
 		this.Liste_pieces = ChessPiecesFactory.newPieces(couleur);
 	}
 	
 	public Couleur getCouleur() {
-		//TODO
+		return this.Liste_pieces.get(0).getCouleur();
 	}
 	
 	@Override
 	public String toString() {
-		
-		return "Jeu []";
+		String string = "";
+		for(Pieces Piece:Liste_pieces) {
+			string += Piece.toString() + " ";
+		}
+		return "Jeu[" + string + "]";
 	}
 
 	public boolean isPieceHere(int x, int y) {
-		//TODO
-		return false;
+		if(this.findPiece(x, y) != null) {
+		return true;
+		}else {
+			return false;
+		}
 	}
+		
 	
 	public boolean isMoveOk(int xInit, int yInit, int xFinal, int yFinal) {
-		//TODO
+		Pieces pieceInit = this.findPiece(xInit, yInit);
+		Pieces pieceFinal = this.findPiece(xFinal, yFinal);
+		if (pieceInit != null) {
+			if( (xFinal >= 0 && xFinal <= 7 && yFinal >= 0 && yFinal <= 7)
+				&& (pieceFinal != null)
+				&& (pieceInit.isMoveOk(xFinal, yFinal))){
+					//TODO verif que rien sur trajectoire
+				
+			}
+		}else if(xFinal >= 0 && xFinal <= 7 && yFinal >= 0 && yFinal <= 7) {
+			//TODO verif que rien sur trajectoire
+		}else {
+			return false;
+		}
 		
 	}
 	
@@ -44,10 +74,6 @@ public class Jeu {
 	public Couleur getPieceColor(int x, int y) {
 		//TODO
 		
-	}
-	
-	public Couleur getCouleur() {
-		//TODO
 	}
 	
 	public java.util.List<PieceIHM> getPiecesIHM(){
@@ -76,6 +102,14 @@ public class Jeu {
 	
 	public Coord getKingCoord() {
 		//TODO
+	}
+	
+	public static void main(String args[]) {
+		Jeu monjeu = new Jeu(Couleur.NOIR);
+//		System.out.println(monjeu.toString());
+		Pieces piece = monjeu.findPiece(4,0);
+		System.out.println(piece);
+		System.out.println(monjeu.isPieceHere(3, 3));
 	}
 	
 	

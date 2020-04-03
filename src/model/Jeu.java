@@ -1,15 +1,27 @@
 package model;
 
-public class Jeu {
+import java.util.List;
 
+import tools.ChessPiecesFactory;
+
+public class Jeu {
+	
+	List<Pieces> Liste_pieces;
+	
 	public Jeu(Couleur couleur) {
-		// TODO Auto-generated constructor stub
+		this.Liste_pieces = ChessPiecesFactory.newPieces(couleur);
 	}
 	
 	public Couleur getCouleur() {
 		//TODO
 	}
 	
+	@Override
+	public String toString() {
+		
+		return "Jeu []";
+	}
+
 	public boolean isPieceHere(int x, int y) {
 		//TODO
 		return false;

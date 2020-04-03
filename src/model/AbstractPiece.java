@@ -31,7 +31,7 @@ public abstract class AbstractPiece implements Pieces {
 
 	@Override
 	public boolean move(int xFinal, int yFinal) {
-		if (isMoveOk(xFinal, yFinal)) {
+		if (this.isMoveOk(xFinal, yFinal)) {
 			coord.setX(xFinal);
 			coord.setY(yFinal);
 			return true;
@@ -42,6 +42,7 @@ public abstract class AbstractPiece implements Pieces {
 
 	@Override
 	public boolean capture() {
+		/*
 		// TODO Auto-generated method stub
 		int compteur = 0;
 		for(Coord l:liste_coord) {
@@ -56,11 +57,22 @@ public abstract class AbstractPiece implements Pieces {
 		} else {
 			return false;
 		}
+		*/
+		return false;
 	}
 
 	@Override
 	public String toString() {
 		return "AbstractPiece [couleur=" + couleur + ", coord=" + coord + "]";
+	}
+	
+	public static void main(String args[]) {
+		Pieces maPiece = new Cavalier(Couleur.NOIR, new Coord(0, 0));
+		System.out.println(maPiece.getX());
+		System.out.println(maPiece.move(0,0));
+		System.out.println(maPiece.getY());
+		System.out.println(maPiece.capture());
+		System.out.println(maPiece.toString());
 	}
 
 }

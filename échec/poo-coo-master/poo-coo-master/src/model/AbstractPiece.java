@@ -31,13 +31,9 @@ public abstract class AbstractPiece implements Pieces {
 
 	@Override
 	public boolean move(int xFinal, int yFinal) {
-		if (this.isMoveOk(xFinal, yFinal)) {
-			coord.setX(xFinal);
-			coord.setY(yFinal);
-			return true;
-		} else {
-			return false;
-		}
+		coord.setX(xFinal);
+		coord.setY(yFinal);
+		return true;
 	}
 
 	@Override

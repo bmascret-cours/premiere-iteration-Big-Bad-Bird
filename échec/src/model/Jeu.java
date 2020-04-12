@@ -60,7 +60,7 @@ public class Jeu {
 		if (pieceInit != null) {
 			if((pieceInit.getClass().getSimpleName() != "Cavalier")
 				&& (pieceInit.isMoveOk(xFinal, yFinal))){
-					// verif que rien sur trajectoire (cas mêmes couleurs)
+					// verif que rien sur trajectoire (cas mï¿½mes couleurs)
 					//diag
 					if(xFinal > xInit && yFinal > yInit) {
 						for(int i = 1; i < xFinal - xInit; i++) {
@@ -104,21 +104,19 @@ public class Jeu {
 								return false;
 							}
 						}
-					}
-					if(xFinal == xInit && yFinal < yInit) {
+					}else if(xFinal == xInit && yFinal < yInit) {
 						for(int i = 1; i < yInit - yFinal; i++) {
 							if(this.findPiece(xInit, yInit - i) != null) {
 								return false;
 							}
 						}
-					}else {
-						if(findPiece(xFinal, yFinal) == null) {
-							return true;
-						}else {
-							return this.castling;
-						}
 					}
-			}else if((pieceFinal != null )
+					if(findPiece(xFinal, yFinal) == null) {
+						return true;
+					}else {
+						return this.castling;
+					}
+				}else if((pieceFinal != null )
 					&& (pieceInit.getClass().getSimpleName() == "Cavalier")
 					&& (pieceInit.isMoveOk(xFinal, yFinal))) {
 						return true;
@@ -218,8 +216,8 @@ public class Jeu {
 		
 		for (Pieces piece : pieces){
 			boolean existe = false;
-			// si le type de piece existe déjà dans la liste de PieceIHM
-			// ajout des coordonnées de la pièce dans la liste de Coord de ce type
+			// si le type de piece existe dï¿½jï¿½ dans la liste de PieceIHM
+			// ajout des coordonnï¿½es de la piï¿½ce dans la liste de Coord de ce type
 			// si elle est toujours en jeu (x et y != -1)
 			for ( PieceIHM pieceIHM : list){
 				if ((pieceIHM.getTypePiece()).equals(piece.getClass().getSimpleName())){
@@ -229,7 +227,7 @@ public class Jeu {
 					}
 				}
 			}
-			// sinon, création d'une nouvelle PieceIHM si la pièce est toujours en jeu
+			// sinon, crï¿½ation d'une nouvelle PieceIHM si la piï¿½ce est toujours en jeu
 			if (! existe) {
 				if (piece.getX() != -1){
 					newPieceIHM = new PieceIHM(piece.getClass().getSimpleName(),

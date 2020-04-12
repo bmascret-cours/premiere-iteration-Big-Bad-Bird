@@ -90,8 +90,11 @@ public class Echiquier implements BoardGames {
 		Echiquier ech = new Echiquier();
 		System.out.println(ech.toString());
 		ech.switchJoueur();
+		System.out.println(ech.getColorCurrentPlayer());
 		System.out.println(ech.move(0, 1, 0, 2));
-		System.out.println(ech.move(0, 0, 0, 1));
+		ech.switchJoueur();
+		System.out.println(ech.getColorCurrentPlayer());
+		System.out.println(ech.move(4,6,4,5));
 		System.out.println(ech.getPiecesIHM());
 	}
 }

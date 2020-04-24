@@ -67,8 +67,7 @@ public class Echiquier implements BoardGames {
 	public boolean isMoveOk(int xInit, int yInit, int xFinal, int yFinal) {
 		if (!this.jeuCourant.isPieceHere(xInit, yInit)) {
 			return false;
-		}
-		if( xFinal < 0 || xFinal > 7 || yFinal < 0 || yFinal > 7
+		}else if( xFinal < 0 || xFinal > 7 || yFinal < 0 || yFinal > 7
 				  || (xFinal == xInit && yFinal == yInit)) {
 			return false;
 		}else if (jeu1.isMoveOk(xInit, yInit, xFinal, yFinal)

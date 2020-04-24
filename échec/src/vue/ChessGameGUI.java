@@ -16,7 +16,11 @@ import javax.swing.WindowConstants;
 
 public class ChessGameGUI extends JFrame implements Serializable, MouseListener, MouseMotionListener, ImageObserver,
 		MenuContainer, EventListener, Observer, Accessible, RootPaneContainer, WindowConstants {
-
+	
+	
+	
+	
+	
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub

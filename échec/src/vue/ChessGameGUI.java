@@ -27,22 +27,25 @@ import javax.swing.JPanel;
 import javax.swing.RootPaneContainer;
 import javax.swing.WindowConstants;
 
+import controler.controlerLocal.ChessGameControler;
 import model.Couleur;
 import model.Pieces;
 import tools.ChessImageProvider;
 import tools.ChessPiecesFactory;
 
 
+
 public class ChessGameGUI extends JFrame implements Serializable, MouseListener, MouseMotionListener, ImageObserver,
 		MenuContainer, EventListener, Observer, Accessible, RootPaneContainer, WindowConstants {
 	
+	String title;
 	JLayeredPane layeredPane;
 	JPanel vueChessBoard;
 	JLabel vueChessPiece;
 	int xAdjustment;
 	int yAdjustment;
 	
-	public ChessGameGUI(){
+	public ChessGameGUI(String title, ChessGameControler chessGaeControler, Dimension dim){
 		Dimension boardSize = new Dimension(600, 600);
 		 
 		//  Use a Layered Pane for this this application

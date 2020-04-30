@@ -22,7 +22,7 @@ public class Jeu {
 		this.castling = false;
 	}
 	
-	private Pieces findPiece(int x, int y) {
+	protected Pieces findPiece(int x, int y) {
 		Pieces cherchee = null;
 		for(Pieces Piece:this.pieces) {
 			if( Piece.getX() == x && Piece.getY() == y) {
@@ -118,6 +118,10 @@ public class Jeu {
 					}
 				}else if((pieceFinal != null )
 					&& (pieceInit.getClass().getSimpleName() == "Cavalier")
+					&& (pieceInit.isMoveOk(xFinal, yFinal))) {
+						return true;
+			}else if((pieceFinal != null )
+					&& (pieceInit.getClass().getSimpleName() == "Pion")
 					&& (pieceInit.isMoveOk(xFinal, yFinal))) {
 						return true;
 			}else {

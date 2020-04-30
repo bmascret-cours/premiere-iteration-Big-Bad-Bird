@@ -6,9 +6,7 @@ public class Pion extends AbstractPiece implements Pions {
 		super(couleur, coord);
 	}
 
-	@Override
 	public boolean isMoveDiagOk(int xFinal, int yFinal) {
-		//je triche un peu
 		int sens;
 		if(this.getCouleur() == Couleur.NOIR) {
 			sens = 1;

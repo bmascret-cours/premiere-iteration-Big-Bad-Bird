@@ -15,7 +15,7 @@ public class ChessGameDemo extends JFrame implements MouseListener, MouseMotionL
   Dimension boardSize = new Dimension(600, 600);
  
   //  Use a Layered Pane for this this application
- layeredPane = new JLayeredPane();
+  layeredPane = new JLayeredPane();
   getContentPane().add(layeredPane);
   layeredPane.setPreferredSize(boardSize);
   layeredPane.addMouseListener(this);

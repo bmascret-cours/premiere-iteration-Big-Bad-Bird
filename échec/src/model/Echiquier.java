@@ -27,11 +27,7 @@ public class Echiquier implements BoardGames {
 	
 	@Override
 	public boolean move(int xInit, int yInit, int xFinal, int yFinal) {
-		if (this.isMoveOk(xInit, yInit, xFinal, yFinal)) {
-			return jeuCourant.move(xInit, yInit, xFinal, yFinal);
-		}else {
-			return false;
-		}
+		return jeuCourant.move(xInit, yInit, xFinal, yFinal);
 	}
 
 	@Override
@@ -70,15 +66,6 @@ public class Echiquier implements BoardGames {
 		}else if( xFinal < 0 || xFinal > 7 || yFinal < 0 || yFinal > 7
 				  || (xFinal == xInit && yFinal == yInit)) {
 			return false;
-		}else if(jeuCourant.findPiece(xInit, yInit).getClass().getSimpleName() == "Pion"){
-			if(jeu1.isMoveOk(xInit, yInit, xFinal, yFinal)
-				  && jeu2.isMoveOk(xInit, yInit, xFinal, yFinal)
-				  && (jeu1.isPieceHere(xFinal, yFinal)
-						  || jeu2.isPieceHere(xFinal, yFinal))){
-				return true;
-			}else {
-				return false;
-			}
 		}else if (jeu1.isMoveOk(xInit, yInit, xFinal, yFinal)
 				  && jeu2.isMoveOk(xInit, yInit, xFinal, yFinal)){
 			return true;
@@ -103,6 +90,8 @@ public class Echiquier implements BoardGames {
 		ech.switchJoueur();
 		System.out.println(ech.getColorCurrentPlayer());
 		System.out.println(ech.move(4,6,4,5));
+		ech.switchJoueur();
+		System.out.println(ech.move(1, 0, 2, 2));
 		System.out.println(ech.getPiecesIHM());
 	}
 }

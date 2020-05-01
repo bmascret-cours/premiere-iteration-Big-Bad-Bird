@@ -27,11 +27,15 @@ import javax.swing.JPanel;
 import javax.swing.RootPaneContainer;
 import javax.swing.WindowConstants;
 
+import controler.controlerLocal.ChessGameControler;
+import model.Coord;
 import model.Couleur;
+import model.PieceIHM;
 import model.Pieces;
+import model.observable.ChessGame;
 import tools.ChessImageProvider;
 import tools.ChessPiecesFactory;
-
+import controler.ChessGameControlers;
 
 public class ChessGameGUI extends JFrame implements Serializable, MouseListener, MouseMotionListener, ImageObserver,
 		MenuContainer, EventListener, Observer, Accessible, RootPaneContainer, WindowConstants {
@@ -39,11 +43,17 @@ public class ChessGameGUI extends JFrame implements Serializable, MouseListener,
 	JLayeredPane layeredPane;
 	JPanel vueChessBoard;
 	JLabel vueChessPiece;
+	ChessGameControlers chessGameControler;
+	Dimension boardSize;
 	int xAdjustment;
 	int yAdjustment;
+	int xInit;
+	int yInit;
 	
-	public ChessGameGUI(){
-		Dimension boardSize = new Dimension(600, 600);
+	public ChessGameGUI(String title, ChessGameControlers chessGameControler, Dimension dim){
+		
+		this.chessGameControler = chessGameControler;
+		this.boardSize = dim;
 		 
 		//  Use a Layered Pane for this this application
 		layeredPane = new JLayeredPane();
@@ -70,7 +80,7 @@ public class ChessGameGUI extends JFrame implements Serializable, MouseListener,
 			else
 				square.setBackground( i % 2 == 0 ? Color.white : Color.black );
 		}
-	
+	/*
 		//Add pieces to the board
 		
 	
@@ -88,8 +98,7 @@ public class ChessGameGUI extends JFrame implements Serializable, MouseListener,
 			panel = (JPanel)vueChessBoard.getComponent(piece.getX() + piece.getY()*8);
 			panel.add(vuePiece);
 		}
-		
-		
+	*/
 		
 	}
 	
@@ -97,8 +106,20 @@ public class ChessGameGUI extends JFrame implements Serializable, MouseListener,
 	
 	@Override
 	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-
+		
+		JPanel panel;
+		for (int i = 0; i < 64; i++) {
+			panel = (JPanel)vueChessBoard.getComponent(i);
+			panel.removeAll();
+		}
+		for( PieceIHM piece:(List<PieceIHM>)arg) {
+			for(Coord coord : piece.getList()) {
+				JLabel vuePiece = new JLabel( new ImageIcon(ChessImageProvider.getImageFile(piece.getTypePiece(), piece.getCouleur()) ));
+				panel = (JPanel)vueChessBoard.getComponent(coord.getX() + coord.getY()*8);
+				panel.add(vuePiece);
+			}
+		}
+		//vueChessBoard.revalidate();
 	}
 
 	@Override
@@ -139,15 +160,17 @@ public class ChessGameGUI extends JFrame implements Serializable, MouseListener,
 		 
 		if (c instanceof JPanel) 
 		return;
-		 
+		
 		Point parentLocation = c.getParent().getLocation();
 		xAdjustment = parentLocation.x - e.getX();
 		yAdjustment = parentLocation.y - e.getY();
+		xInit = parentLocation.x/(700/8);
+		yInit = parentLocation.y/(700/8);
 		vueChessPiece = (JLabel)c;
 		vueChessPiece.setLocation(e.getX() + xAdjustment, e.getY() + yAdjustment);
 		vueChessPiece.setSize(vueChessPiece.getWidth(), vueChessPiece.getHeight());
 		layeredPane.add(vueChessPiece, JLayeredPane.DRAG_LAYER);
-		
+
 	}
 
 	@Override
@@ -155,8 +178,16 @@ public class ChessGameGUI extends JFrame implements Serializable, MouseListener,
 		if(vueChessPiece == null) return;
 		 
 		  vueChessPiece.setVisible(false);
+		  Coord coordInit = new Coord(xInit, yInit);
+		  Coord coordFinal = new Coord(e.getX()/(boardSize.height/8), e.getY()/(boardSize.height/8));
+		  boolean bmove = chessGameControler.move(coordInit, coordFinal);
+		  if(!bmove) {
+			  
+		  }
+		  /*
 		  Component c =  vueChessBoard.findComponentAt(e.getX(), e.getY());
-		 
+		  
+		  
 		  if (c instanceof JLabel){
 		  Container parent = c.getParent();
 		  parent.remove(0);
@@ -168,16 +199,18 @@ public class ChessGameGUI extends JFrame implements Serializable, MouseListener,
 		  }
 		 
 		  vueChessPiece.setVisible(true);
-		
+		*/
 	}
 	
+	/*
 	public static void main(String[] args) {
-		  JFrame frame = new ChessGameGUI();
+		  JFrame frame = new ChessGameGUI("Jeu d'échec", new ChessGameControlers(), new Dimension(600, 600));
 		  frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE );
 		  frame.pack();
 		  frame.setResizable(true);
 		  frame.setLocationRelativeTo( null );
 		  frame.setVisible(true);
 	}
+	*/
 
 }

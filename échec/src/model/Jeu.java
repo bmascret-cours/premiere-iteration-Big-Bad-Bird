@@ -22,7 +22,7 @@ public class Jeu {
 		this.castling = false;
 	}
 	
-	protected Pieces findPiece(int x, int y) {
+	private Pieces findPiece(int x, int y) {
 		Pieces cherchee = null;
 		for(Pieces Piece:this.pieces) {
 			if( Piece.getX() == x && Piece.getY() == y) {
@@ -113,20 +113,18 @@ public class Jeu {
 					}
 					if(findPiece(xFinal, yFinal) == null) {
 						return true;
-					}else {
+					}else if(pieceInit.getClass().getSimpleName() == "Roi"){
 						return this.castling;
+					}else {
+						return false;
 					}
-				}else if((pieceFinal != null )
+				}else if((pieceFinal == null )
 					&& (pieceInit.getClass().getSimpleName() == "Cavalier")
 					&& (pieceInit.isMoveOk(xFinal, yFinal))) {
 						return true;
-			}else if((pieceFinal != null )
-					&& (pieceInit.getClass().getSimpleName() == "Pion")
-					&& (pieceInit.isMoveOk(xFinal, yFinal))) {
-						return true;
-			}else {
-				return false;
-			}
+				}else {
+					return false;
+				}
 		}else if( Math.abs(xFinal - xInit) == Math.abs(yFinal - yInit)){
 			//test trajectoire pour autre couleur si pas cavalier
 			if(xFinal > xInit && yFinal > yInit) {
@@ -306,6 +304,7 @@ public class Jeu {
 		Pieces piece = monjeu.findPiece(4,0);
 		System.out.println(piece);
 		System.out.println(monjeu.isPieceHere(3, 3));
+		System.out.println(monjeu.getPiecesIHM().get(0));
 	}
 	
 	

@@ -74,7 +74,8 @@ public class ChessGameCmdLine implements Observer{
 	}
 
 	public void go() {
-
+		/*
+	
 		System.out.print("\n Déplacement de 3,6 vers 3,5 = ");
 		chessGameControler.move(new Coord(3,6), new Coord(3, 5));	// true
 
@@ -95,9 +96,21 @@ public class ChessGameCmdLine implements Observer{
 		System.out.print("\n Déplacement de 3,5 vers 3,4 = ");
 		chessGameControler.move(new Coord(3, 5), new Coord(3, 4));	// true	
 		
-		System.out.print("\n Déplacement de 4,3 vers 3,5 = ");
+		System.out.print("\n Déplacement de 4,3 vers 3,4 = ");
 		chessGameControler.move(new Coord(4, 3), new Coord(3, 4));	// true	
-
+		 */
+		
+		System.out.print("\n Déplacement de 0,6 vers 0,4 = ");
+		chessGameControler.move(new Coord(0,6), new Coord(0, 4));	// true
+		
+		System.out.print("\n Déplacement de 1,0 vers 2,2 = ");
+		chessGameControler.move(new Coord(1,0), new Coord(2, 2));   //true
+		
+		System.out.print("\n Déplacement de 0,7 vers 0,5 = ");
+		chessGameControler.move(new Coord(0,7), new Coord(0, 5));	// true
+		
+		System.out.print("\n Déplacement de 2,2 vers 0,3 = ");
+		chessGameControler.move(new Coord(2,2), new Coord(0, 3));	// true
 	}
 
 }

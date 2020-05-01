@@ -31,9 +31,11 @@ public class ChessGameControler extends AbstractChessGameControler {
 		if(this.chessGame.getColorCurrentPlayer() == this.chessGame.getPieceColor(x, y)){
 			return true;
 		}else {
+			chessGame.refresh();
 			return false;
 		}
 	}
+	
 	
 	/* (non-Javadoc)
 	 * @see controler.AbstractChessGameControler#endMove(model.Coord, model.Coord, java.lang.String)

@@ -28,6 +28,7 @@ import javax.swing.RootPaneContainer;
 import javax.swing.WindowConstants;
 
 import controler.controlerLocal.ChessGameControler;
+
 import model.Coord;
 import model.Couleur;
 import model.PieceIHM;
@@ -37,9 +38,11 @@ import tools.ChessImageProvider;
 import tools.ChessPiecesFactory;
 import controler.ChessGameControlers;
 
+
 public class ChessGameGUI extends JFrame implements Serializable, MouseListener, MouseMotionListener, ImageObserver,
 		MenuContainer, EventListener, Observer, Accessible, RootPaneContainer, WindowConstants {
 	
+	String title;
 	JLayeredPane layeredPane;
 	JPanel vueChessBoard;
 	JLabel vueChessPiece;
@@ -50,6 +53,7 @@ public class ChessGameGUI extends JFrame implements Serializable, MouseListener,
 	int xInit;
 	int yInit;
 	
+
 	public ChessGameGUI(String title, ChessGameControlers chessGameControler, Dimension dim){
 		
 		this.chessGameControler = chessGameControler;
@@ -180,10 +184,8 @@ public class ChessGameGUI extends JFrame implements Serializable, MouseListener,
 		  vueChessPiece.setVisible(false);
 		  Coord coordInit = new Coord(xInit, yInit);
 		  Coord coordFinal = new Coord(e.getX()/(boardSize.height/8), e.getY()/(boardSize.height/8));
-		  boolean bmove = chessGameControler.move(coordInit, coordFinal);
-		  if(!bmove) {
-			  
-		  }
+		  chessGameControler.move(coordInit, coordFinal);
+
 		  /*
 		  Component c =  vueChessBoard.findComponentAt(e.getX(), e.getY());
 		  

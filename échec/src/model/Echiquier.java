@@ -68,8 +68,10 @@ public class Echiquier implements BoardGames {
 			return false;
 		}else if (jeu1.isMoveOk(xInit, yInit, xFinal, yFinal)
 				  && jeu2.isMoveOk(xInit, yInit, xFinal, yFinal)){
+			this.setMessage("OK : Déplacement\n");
 			return true;
 		}else {
+			this.setMessage("KO : Déplacement pas autorisé\n");
 			return false;
 		}
 	}

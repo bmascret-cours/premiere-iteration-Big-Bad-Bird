@@ -32,6 +32,7 @@ public class ChessGameControler extends AbstractChessGameControler {
 			return true;
 		}else {
 			chessGame.refresh();
+			System.out.print("KO : C'est au tour de l'autre joueur\n");
 			return false;
 		}
 	}

@@ -67,7 +67,6 @@ public class ChessGame extends Observable implements BoardGames{
 		if (ret){
 			echiquier.switchJoueur();
 		}		
-		
 		this.notifyObservers(echiquier.getPiecesIHM()); 
 		return ret;	
 	}

@@ -58,7 +58,7 @@ public class Jeu {
 		Pieces pieceInit = this.findPiece(xInit, yInit);
 		Pieces pieceFinal = this.findPiece(xFinal, yFinal);
 		if (pieceInit != null) {
-			if((pieceInit.getClass().getSimpleName() != "Cavalier")
+			if((!pieceInit.getClass().getSimpleName().equals("Cavalier"))
 				&& (pieceInit.isMoveOk(xFinal, yFinal))){
 					// verif que rien sur trajectoire (cas m�mes couleurs)
 					//diag
@@ -113,13 +113,13 @@ public class Jeu {
 					}
 					if(findPiece(xFinal, yFinal) == null) {
 						return true;
-					}else if(pieceInit.getClass().getSimpleName() == "Roi"){
+					}else if(pieceInit.getClass().getSimpleName().equals("Roi")){
 						return this.castling;
 					}else {
 						return false;
 					}
 				}else if((pieceFinal == null )
-					&& (pieceInit.getClass().getSimpleName() == "Cavalier")
+					&& (pieceInit.getClass().getSimpleName().equals("Cavalier"))
 					&& (pieceInit.isMoveOk(xFinal, yFinal))) {
 						return true;
 				}else {

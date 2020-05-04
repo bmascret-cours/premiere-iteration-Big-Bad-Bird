@@ -32,6 +32,7 @@ public class Jeu {
 	return cherchee;	
 	}
 	
+	
 	public Couleur getCouleur() {
 		return this.pieces.get(0).getCouleur();
 	}
@@ -187,15 +188,15 @@ public class Jeu {
 	
 	public boolean move(int xInit, int yInit, int xFinal, int yFinal) {
 		Pieces pieceInit = this.findPiece(xInit, yInit);
-		Pieces pieceFinal = this.findPiece(xFinal, yFinal);
 		pieceInit.move(xFinal, yFinal);
-		if(pieceFinal != null) {
-			pieceFinal.capture();
-		}
 		moves.push(yFinal);
 		moves.push(xFinal);
 		moves.push(yInit);
 		moves.push(xInit);
+		if(pieceInit.getClass().getSimpleName().equals("Pion")
+				&& this.isPawnPromotion(xFinal, yFinal)){
+			this.pawnPromotion(xFinal, xFinal, "Reine");
+		}
 		return true;
 	}
 	
@@ -274,18 +275,19 @@ public class Jeu {
 	}
 	
 	public boolean pawnPromotion(int xFinal, int yFinal, java.lang.String type) {
-		if (isPawnPromotion(xFinal, yFinal)) {
-			if (yFinal == 7) {
-				Pieces piece = ChessSinglePieceFactory.newPiece(Couleur.NOIR, "Reine", xFinal, yFinal);
-				pieces.add(piece);
-				return true;
-			}else {
-				Pieces piece = ChessSinglePieceFactory.newPiece(Couleur.NOIR, "Reine", xFinal, yFinal);
-				pieces.add(piece);
-				return true;
-			}
+		
+		Pieces oldPiece = this.findPiece(xFinal, yFinal);
+		System.out.print(oldPiece.toString());
+		if (yFinal == 7) {
+			oldPiece.move(-1, -1);
+			Pieces piece = ChessSinglePieceFactory.newPiece(Couleur.BLANC, type, xFinal, yFinal);
+			pieces.add(piece);
+			return true;
 		}else {
-			return false;
+			oldPiece.move(-1, -1);
+			Pieces piece = ChessSinglePieceFactory.newPiece(Couleur.NOIR, type, xFinal, yFinal);
+			pieces.add(piece);
+			return true;
 		}
 	}
 	

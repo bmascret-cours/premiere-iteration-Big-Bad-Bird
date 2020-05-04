@@ -126,7 +126,9 @@ public class Jeu {
 				}else {
 					return false;
 				}
-		}else if( Math.abs(xFinal - xInit) == Math.abs(yFinal - yInit)){
+		}else if( Math.abs(xFinal - xInit) == Math.abs(yFinal - yInit)
+				|| Math.abs(xFinal - xInit) == 0
+				|| Math.abs(yFinal - yInit) == 0){
 			//test trajectoire pour autre couleur si pas cavalier
 			if(xFinal > xInit && yFinal > yInit) {
 				for(int i = 1; i < xFinal - xInit; i++) {
@@ -177,25 +179,25 @@ public class Jeu {
 						return false;
 					}
 				}
-			}else {
-				return true;
 			}
+			return true;
 		}else {
 			return true;
 		}
-		return false;
 	}
 	
 	public boolean move(int xInit, int yInit, int xFinal, int yFinal) {
 		Pieces pieceInit = this.findPiece(xInit, yInit);
 		pieceInit.move(xFinal, yFinal);
+		/*
 		moves.push(yFinal);
 		moves.push(xFinal);
 		moves.push(yInit);
 		moves.push(xInit);
+		*/
 		if(pieceInit.getClass().getSimpleName().equals("Pion")
 				&& this.isPawnPromotion(xFinal, yFinal)){
-			this.pawnPromotion(xFinal, xFinal, "Reine");
+			this.pawnPromotion(xFinal, yFinal, "Reine");
 		}
 		return true;
 	}
@@ -265,8 +267,8 @@ public class Jeu {
 		//TODO
 	}
 	
-	public boolean isPawnPromotion(int xFinal, int yfinal) {
-		if(yfinal == 7 || yfinal ==0) {
+	public boolean isPawnPromotion(int xFinal, int yFinal) {
+		if(yFinal == 7 || yFinal ==0) {
 			return true;
 		}else {
 			return false;
@@ -277,7 +279,6 @@ public class Jeu {
 	public boolean pawnPromotion(int xFinal, int yFinal, java.lang.String type) {
 		
 		Pieces oldPiece = this.findPiece(xFinal, yFinal);
-		System.out.print(oldPiece.toString());
 		if (yFinal == 7) {
 			oldPiece.move(-1, -1);
 			Pieces piece = ChessSinglePieceFactory.newPiece(Couleur.BLANC, type, xFinal, yFinal);

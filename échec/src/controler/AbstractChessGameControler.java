@@ -1,5 +1,7 @@
 package controler;
 
+import java.awt.Dimension;
+
 import model.Coord;
 import model.Couleur;
 import model.observable.ChessGame;
@@ -49,7 +51,6 @@ public abstract class AbstractChessGameControler implements ChessGameControlers 
 			}
 
 		}
-		chessGame.refresh();
 		return ret;
 	}
 
@@ -94,5 +95,13 @@ public abstract class AbstractChessGameControler implements ChessGameControlers 
 	protected Couleur getPieceColor(Coord initCoord){		
 		return this.chessGame.getPieceColor(initCoord.x, initCoord.y);		
 	}	
+	
+	public Coord coordGrilleVue(Dimension boardSize, int x, int y) {
+		return (new Coord(x*(boardSize.height/8),y*(boardSize.width/8)));
+	}
+	
+	public Coord coordVueGrille(Dimension boardSize, int x, int y) {
+		return (new Coord(x/(boardSize.height/8),y/(boardSize.width/8)));
+	}
 	
 }

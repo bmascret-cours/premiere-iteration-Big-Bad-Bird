@@ -1,5 +1,7 @@
 package controler;
 
+import java.awt.Dimension;
+
 import model.Coord;
 
 public interface ChessGameControlers {
@@ -28,5 +30,21 @@ public interface ChessGameControlers {
 	 * pour empêcher tout déplacement sur le damier
 	 */
 	public boolean isPlayerOK(Coord initCoord);
+	
+	/**
+	 * @param boardSize
+	 * @param x
+	 * @param y
+	 * @return corrdonnés convertis
+	 */
+	public Coord coordGrilleVue(Dimension boardSize, int x, int y);
+
+	/**
+	 * @param boardSize
+	 * @param x
+	 * @param y
+	 * @return corrdonnés convertis
+	 */
+	public Coord coordVueGrille(Dimension boardSize, int x, int y);
 
 }

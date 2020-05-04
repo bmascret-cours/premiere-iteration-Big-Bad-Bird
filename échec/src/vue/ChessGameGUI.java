@@ -42,16 +42,15 @@ import controler.ChessGameControlers;
 public class ChessGameGUI extends JFrame implements Serializable, MouseListener, MouseMotionListener, ImageObserver,
 		MenuContainer, EventListener, Observer, Accessible, RootPaneContainer, WindowConstants {
 	
-	String title;
-	JLayeredPane layeredPane;
-	JPanel vueChessBoard;
-	JLabel vueChessPiece;
-	ChessGameControlers chessGameControler;
-	Dimension boardSize;
-	int xAdjustment;
-	int yAdjustment;
-	int xInit;
-	int yInit;
+	protected String title;
+	private JLayeredPane layeredPane;
+	private JPanel vueChessBoard;
+	private JLabel vueChessPiece;
+	protected ChessGameControlers chessGameControler;
+	private Dimension boardSize;
+	private int xAdjustment;
+	private int yAdjustment;
+	private Coord coordInit;
 	
 
 	public ChessGameGUI(String title, ChessGameControlers chessGameControler, Dimension dim){
@@ -168,8 +167,7 @@ public class ChessGameGUI extends JFrame implements Serializable, MouseListener,
 		Point parentLocation = c.getParent().getLocation();
 		xAdjustment = parentLocation.x - e.getX();
 		yAdjustment = parentLocation.y - e.getY();
-		xInit = parentLocation.x/(700/8);
-		yInit = parentLocation.y/(700/8);
+		coordInit = chessGameControler.coordVueGrille(boardSize, parentLocation.x, parentLocation.y);
 		vueChessPiece = (JLabel)c;
 		vueChessPiece.setLocation(e.getX() + xAdjustment, e.getY() + yAdjustment);
 		vueChessPiece.setSize(vueChessPiece.getWidth(), vueChessPiece.getHeight());
@@ -182,26 +180,18 @@ public class ChessGameGUI extends JFrame implements Serializable, MouseListener,
 		if(vueChessPiece == null) return;
 		 
 		  vueChessPiece.setVisible(false);
-		  Coord coordInit = new Coord(xInit, yInit);
-		  Coord coordFinal = new Coord(e.getX()/(boardSize.height/8), e.getY()/(boardSize.height/8));
-		  chessGameControler.move(coordInit, coordFinal);
+		  Coord coordFinal = chessGameControler.coordVueGrille(boardSize, e.getX(), e.getY());
+		  boolean retMove = chessGameControler.move(coordInit, coordFinal);
 
-		  /*
-		  Component c =  vueChessBoard.findComponentAt(e.getX(), e.getY());
-		  
-		  
-		  if (c instanceof JLabel){
-		  Container parent = c.getParent();
-		  parent.remove(0);
-		  parent.add( vueChessPiece );
+		  if (!retMove) {
+			  
+			  Coord coordInitVue = chessGameControler.coordGrilleVue(boardSize, coordInit.getX(), coordInit.getY());
+			  
+			  JPanel panel = (JPanel)vueChessBoard.getComponent(coordInit.getX() + coordInit.getY()*8);
+			  panel.add( vueChessPiece );
+			  
+			  vueChessPiece.setVisible(true);
 		  }
-		  else {
-		  Container parent = (Container)c;
-		  parent.add( vueChessPiece );
-		  }
-		 
-		  vueChessPiece.setVisible(true);
-		*/
 	}
 	
 	/*

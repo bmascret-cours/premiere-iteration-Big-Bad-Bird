@@ -2,6 +2,9 @@ package controler.controlerLocal;
 
 import model.Coord;
 import model.observable.ChessGame;
+
+import java.awt.Dimension;
+
 import controler.AbstractChessGameControler;
 
 /**
@@ -31,11 +34,12 @@ public class ChessGameControler extends AbstractChessGameControler {
 		if(this.chessGame.getColorCurrentPlayer() == this.chessGame.getPieceColor(x, y)){
 			return true;
 		}else {
-			chessGame.refresh();
+			//chessGame.refresh();
 			System.out.print("KO : C'est au tour de l'autre joueur\n");
 			return false;
 		}
 	}
+	
 	
 	
 	/* (non-Javadoc)

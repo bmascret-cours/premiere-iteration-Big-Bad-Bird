@@ -98,11 +98,11 @@ public class ChessGame extends Observable implements BoardGames{
 		super.setChanged();
 		super.notifyObservers(arg); 
 	}
-	
+	/*
 	public void refresh() {
 		notifyObservers(echiquier.getPiecesIHM());
 	}
-
+	 */
 	/* (non-Javadoc)
 	 * @see java.util.Observable#addObserver(java.util.Observer)
 	 */
